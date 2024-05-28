@@ -112,9 +112,13 @@ app.frame('/scs-frame/:castFid', async (c) => {
       }
     `;
 
-    const { data, error } = await fetchQuery(query);
+    const { data } = await fetchQuery(query);
 
-    console.log(data);
+    const socialCapital = data.Socials.Social[0].socialCapital;
+    const username = data.Socials.Social[0].profileName;
+
+    const score = socialCapital.socialCapitalScore;
+    const rank = socialCapital.socialCapitalRank;
 
     return c.res({
       image: (
@@ -128,12 +132,20 @@ app.frame('/scs-frame/:castFid', async (c) => {
         >
             <VStack gap="4">
                 <Heading color="red" weight="900" align="center" size="32">
-                  🎖️ SCS Checker 🎖️
+                  Result
                 </Heading>
-                <Spacer size="16" />
-                <Text align="center" color="tosca" size="16">
-                  a frame & cast action to check social capital score.
-                </Text>
+                <Spacer size="22" />
+                <Box flexDirection="row" justifyContent="center">
+                    <Text color="tosca" align="center" size="16">Rank</Text>
+                    <Spacer size="10" />
+                    <Text color="yellow" align="center" size="16"> #{rank} 🏁</Text>
+                </Box>
+                <Spacer size="10" />
+                <Box flexDirection="row" justifyContent="center">
+                    <Text color="tosca" align="center" size="16">@{username} have score</Text>
+                    <Spacer size="10" />
+                    <Text color="yellow" align="center" size="16"> {score} 🎖️</Text>
+                </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="white" align="center" size="14">created by</Text>
@@ -208,7 +220,8 @@ app.frame('/search', async (c) => {
     ),
     intents: [ 
       <TextInput placeholder="Enter username e.g. betashop.eth" />,
-      <Button action='/result'>Submit</Button>,
+      <Button action='/result'>Submit ⇧</Button>,
+      <Button action='/'>Cancel ⏏︎</Button>,
     ]
   })
 })
@@ -242,7 +255,7 @@ app.frame('/result', async (c) => {
     }
     `;
 
-    const { data, error } = await fetchQuery(query);
+    const { data } = await fetchQuery(query);
 
     const socialCapital = data.Socials.Social[0].socialCapital;
 
@@ -284,6 +297,9 @@ app.frame('/result', async (c) => {
             </VStack>
         </Box>
       ),
+      intents: [
+        <Button action='/search'>Back ⏏︎</Button>,
+      ]
     });
   } catch (error) {
     console.error("Error fetching user data:", error);
@@ -303,7 +319,7 @@ app.frame('/result', async (c) => {
                 </Heading>
                 <Spacer size="16" />
                 <Text align="center" color="tosca" size="16">
-                  Uh oh! Something went wrong.
+                   Uh oh! Username not found.
                 </Text>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
@@ -314,6 +330,9 @@ app.frame('/result', async (c) => {
             </VStack>
         </Box>
       ),
+      intents: [
+        <Button action='/search'>Try again ⏏︎</Button>,
+      ]
     });
   }
 })
