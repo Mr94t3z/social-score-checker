@@ -5,19 +5,22 @@ import { Box, Heading, Text, VStack, Spacer, vars } from "../lib/ui.js";
 import dotenv from 'dotenv';
 
 // Uncomment this packages to tested on local server
-import { devtools } from 'frog/dev';
-import { serveStatic } from 'frog/serve-static';
+// import { devtools } from 'frog/dev';
+// import { serveStatic } from 'frog/serve-static';
 
 
 // Load environment variables from .env file
 dotenv.config();
+
+const CAST_INTENS = 
+  "https://warpcast.com/~/compose?text=&embeds[]=https://social-score-checker.vercel.app/api/frame"
 
 
 export const app = new Frog({
   assetsPath: '/',
   basePath: '/api/frame',
   ui: { vars },
-  browserLocation: 'https://github.com/Mr94t3z/social-score-checker'
+  browserLocation: CAST_INTENS
   // Supply a Hub to enable frame verification.
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 })
@@ -78,7 +81,7 @@ app.castAction(
 
     return c.frame({ path: `/scs-frame/${castFid}`})
   }, 
-  { name: "🎖️ SCS Checker 🎖️", icon: "star" }
+  { name: "Social Score Checker", icon: "star" }
 )
 
 
@@ -339,7 +342,7 @@ app.frame('/result', async (c) => {
 
 
 // Uncomment this line code to tested on local server
-devtools(app, { serveStatic });
+// devtools(app, { serveStatic });
 
 export const GET = handle(app)
 export const POST = handle(app)
