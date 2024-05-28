@@ -81,7 +81,7 @@ app.castAction(
 
     return c.frame({ path: `/scs-frame/${castFid}`})
   }, 
-  { name: "Social Score Checker", icon: "star" }
+  { name: "SCS Checker", icon: "id-badge" }
 )
 
 
