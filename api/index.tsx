@@ -1,4 +1,4 @@
-import { Button, Frog } from 'frog'
+import { Button, Frog, TextInput } from 'frog'
 import { handle } from 'frog/vercel'
 import { init, fetchQuery } from "@airstack/node";
 import { Box, Heading, Text, VStack, Spacer, vars } from "../lib/ui.js";
@@ -86,7 +86,7 @@ app.frame('/scs-frame/:castFid', async (c) => {
   const { castFid } = c.req.param();
 
   try {
-    // Define FarcasterCasts GraphQL query
+    // Define Farcaster Social Capital GraphQL query by FID
     const query = 
     `
       query MyQuery {
@@ -106,6 +106,7 @@ app.frame('/scs-frame/:castFid', async (c) => {
               socialCapitalScore
               socialCapitalRank
             }
+            profileName
           }
         }
       }
@@ -178,36 +179,75 @@ app.frame('/scs-frame/:castFid', async (c) => {
 
 
 app.frame('/search', async (c) => {
+  return c.res({
+    image: (
+      <Box
+          grow
+          alignVertical="center"
+          backgroundColor="blue"
+          padding="48"
+          textAlign="center"
+          height="100%"
+      >
+          <VStack gap="4">
+              <Heading color="red" weight="900" align="center" size="32">
+                🎖️ SCS Checker 🎖️
+              </Heading>
+              <Spacer size="16" />
+              <Text align="center" color="tosca" size="16">
+                Please input the username to check the SCS.
+              </Text>
+              <Spacer size="22" />
+              <Box flexDirection="row" justifyContent="center">
+                  <Text color="white" align="center" size="14">created by</Text>
+                  <Spacer size="10" />
+                  <Text color="red" decoration="underline" align="center" size="14"> @0x94t3z</Text>
+              </Box>
+          </VStack>
+      </Box>
+    ),
+    intents: [ 
+      <TextInput placeholder="Enter username e.g. betashop.eth" />,
+      <Button action='/result'>Submit</Button>,
+    ]
+  })
+})
+
+
+app.frame('/result', async (c) => {
+  const { inputText } = c;
+
+  const username = inputText;
 
   try {
-    // Define FarcasterCasts GraphQL query
+    // Define Farcaster Social Capital GraphQL query by username
     const query = 
     `
-      query MyQuery {
-        Socials(
-          input: {
-            filter: {
-              dappName: {
-                _eq: farcaster
-              },
-              identity: { _eq: "fc_fid:${castFid}" }
-            },
+    query MyQuery {
+      Socials(
+        input: {filter: 
+          {
+            dappName: {_eq: farcaster}, 
+            profileName: {_eq: "${username}"}}, 
             blockchain: ethereum
           }
-        ) {
-          Social {
-            socialCapital {
-              socialCapitalScore
-              socialCapitalRank
-            }
+      ) {
+        Social {
+          socialCapital {
+            socialCapitalScore
+            socialCapitalRank
           }
         }
       }
+    }
     `;
 
     const { data, error } = await fetchQuery(query);
 
-    console.log(data);
+    const socialCapital = data.Socials.Social[0].socialCapital;
+
+    const score = socialCapital.socialCapitalScore;
+    const rank = socialCapital.socialCapitalRank;
 
     return c.res({
       image: (
@@ -221,12 +261,20 @@ app.frame('/search', async (c) => {
         >
             <VStack gap="4">
                 <Heading color="red" weight="900" align="center" size="32">
-                  🎖️ SCS Checker 🎖️
+                  Result
                 </Heading>
-                <Spacer size="16" />
-                <Text align="center" color="tosca" size="16">
-                  a frame & cast action to check social capital score.
-                </Text>
+                <Spacer size="22" />
+                <Box flexDirection="row" justifyContent="center">
+                    <Text color="tosca" align="center" size="16">Rank</Text>
+                    <Spacer size="10" />
+                    <Text color="yellow" align="center" size="16"> #{rank} 🏁</Text>
+                </Box>
+                <Spacer size="10" />
+                <Box flexDirection="row" justifyContent="center">
+                    <Text color="tosca" align="center" size="16">@{username} have score</Text>
+                    <Spacer size="10" />
+                    <Text color="yellow" align="center" size="16"> {score} 🎖️</Text>
+                </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="white" align="center" size="14">created by</Text>
