@@ -147,7 +147,7 @@ app.frame('/scs-frame/:castFid', async (c) => {
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="tosca" align="center" size="16">@{username} have score</Text>
                     <Spacer size="10" />
-                    <Text color="yellow" align="center" size="16"> {score} 🎖️</Text>
+                    <Text color="yellow" align="center" size="16"> {score} 🪪</Text>
                 </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
@@ -173,11 +173,11 @@ app.frame('/scs-frame/:castFid', async (c) => {
         >
             <VStack gap="4">
                 <Heading color="red" weight="900" align="center" size="32">
-                  Error
+                  ⚠️ Error ⚠️
                 </Heading>
                 <Spacer size="16" />
                 <Text align="center" color="tosca" size="16">
-                  Uh oh! Something went wrong.
+                  Uh oh, something went wrong!
                 </Text>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
@@ -289,7 +289,7 @@ app.frame('/result', async (c) => {
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="tosca" align="center" size="16">@{username} have score</Text>
                     <Spacer size="10" />
-                    <Text color="yellow" align="center" size="16"> {score} 🎖️</Text>
+                    <Text color="yellow" align="center" size="16"> {score} 🪪</Text>
                 </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
@@ -305,7 +305,6 @@ app.frame('/result', async (c) => {
       ]
     });
   } catch (error) {
-    console.error("Error fetching user data:", error);
     return c.res({
       image: (
         <Box
@@ -318,11 +317,11 @@ app.frame('/result', async (c) => {
         >
             <VStack gap="4">
                 <Heading color="red" weight="900" align="center" size="32">
-                  Error
+                  ⚠️ Error ⚠️
                 </Heading>
                 <Spacer size="16" />
                 <Text align="center" color="tosca" size="16">
-                   Uh oh! Username not found.
+                   Uh oh, username not found!
                 </Text>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
