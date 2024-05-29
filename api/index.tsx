@@ -135,7 +135,7 @@ app.frame('/scs-frame/:castFid', async (c) => {
         >
             <VStack gap="4">
                 <Heading color="red" weight="900" align="center" size="32">
-                  Result
+                🎖️ Result 🎖️
                 </Heading>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
@@ -277,7 +277,7 @@ app.frame('/result', async (c) => {
         >
             <VStack gap="4">
                 <Heading color="red" weight="900" align="center" size="32">
-                  Result
+                  🎖️ Result 🎖️
                 </Heading>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
