@@ -1,7 +1,7 @@
 import { Button, Frog, TextInput } from 'frog'
 import { handle } from 'frog/vercel'
 import { init, fetchQuery } from "@airstack/node";
-import { Box, Heading, Text, VStack, Spacer, vars } from "../lib/ui.js";
+import { Box, Image, Heading, Text, VStack, Spacer, vars } from "../lib/ui.js";
 import dotenv from 'dotenv';
 
 // Uncomment this packages to tested on local server
@@ -48,7 +48,7 @@ app.frame('/', (c) => {
               </Heading>
               <Spacer size="16" />
               <Text align="center" color="tosca" size="16">
-                a frame & cast action to check social capital score.
+                A Frame & Cast Action to check Social Capital Scores built with Airstack.
               </Text>
               <Spacer size="22" />
               <Box flexDirection="row" justifyContent="center">
@@ -62,7 +62,7 @@ app.frame('/', (c) => {
     intents: [
       <Button action='/search'>Search 🕵🏻</Button>,
       <Button.AddCastAction action='/scs'>
-        Install Action
+        Install Action ↓
       </Button.AddCastAction>,
     ]
   })
@@ -81,7 +81,7 @@ app.castAction(
 
     return c.frame({ path: `/scs-frame/${castFid}`})
   }, 
-  { name: "SCS Checker", icon: "id-badge" }
+  { name: "SCS Checker", icon: "id-badge", description: "A Farcaster Social Capital Scores (SCS) Checker built with Airstack."}
 )
 
 
@@ -158,6 +158,9 @@ app.frame('/scs-frame/:castFid', async (c) => {
             </VStack>
         </Box>
       ),
+      intents: [
+        <Button.Link href='https://docs.airstack.xyz/airstack-docs-and-faqs'>Learn Airstack</Button.Link>,
+      ]
     });
   } catch (error) {
     console.error("Error fetching user data:", error);
@@ -205,6 +208,12 @@ app.frame('/search', async (c) => {
           height="100%"
       >
           <VStack gap="4">
+              <Image
+                height="48"
+                objectFit="cover"
+                src="/airstack.png"
+              />
+              <Spacer size="12" />
               <Heading color="red" weight="900" align="center" size="32">
                 🎖️ SCS Checker 🎖️
               </Heading>
@@ -218,6 +227,7 @@ app.frame('/search', async (c) => {
                   <Spacer size="10" />
                   <Text color="red" decoration="underline" align="center" size="14"> @0x94t3z</Text>
               </Box>
+              <Spacer size="32" />
           </VStack>
       </Box>
     ),
@@ -301,6 +311,7 @@ app.frame('/result', async (c) => {
         </Box>
       ),
       intents: [
+        <Button.Link href='https://docs.airstack.xyz/airstack-docs-and-faqs'>Learn Airstack</Button.Link>,
         <Button action='/search'>Back ⏏︎</Button>,
       ]
     });
