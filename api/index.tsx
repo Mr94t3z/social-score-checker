@@ -43,10 +43,22 @@ app.frame('/', (c) => {
           height="100%"
       >
           <VStack gap="4">
+              <Box flexDirection="row">
+                <Image
+                    height="24"
+                    objectFit="cover"
+                    src="/airstack.png"
+                  />
+                <Spacer size="10" />
+                <Text color="red" decoration="underline" align="center" size="14">
+                  Airstack
+                </Text>
+              </Box>
+              <Spacer size="16" />
               <Heading color="red" weight="900" align="center" size="32">
                 🎖️ SCS Checker 🎖️
               </Heading>
-              <Spacer size="16" />
+              <Spacer size="22" />
               <Text align="center" color="tosca" size="16">
                 A Frame & Cast Action to check Social Capital Scores built with Airstack.
               </Text>
@@ -134,6 +146,18 @@ app.frame('/scs-frame/:castFid', async (c) => {
             height="100%"
         >
             <VStack gap="4">
+                <Box flexDirection="row">
+                  <Image
+                      height="24"
+                      objectFit="cover"
+                      src="/airstack.png"
+                    />
+                  <Spacer size="10" />
+                  <Text color="red" decoration="underline" align="center" size="14">
+                    Airstack
+                  </Text>
+                </Box>
+                <Spacer size="16" />
                 <Heading color="red" weight="900" align="center" size="32">
                 🎖️ Result 🎖️
                 </Heading>
@@ -175,6 +199,18 @@ app.frame('/scs-frame/:castFid', async (c) => {
             height="100%"
         >
             <VStack gap="4">
+                <Box flexDirection="row">
+                  <Image
+                      height="24"
+                      objectFit="cover"
+                      src="/airstack.png"
+                    />
+                  <Spacer size="10" />
+                  <Text color="red" decoration="underline" align="center" size="14">
+                    Airstack
+                  </Text>
+                </Box>
+                <Spacer size="16" />
                 <Heading color="red" weight="900" align="center" size="32">
                   ⚠️ Error ⚠️
                 </Heading>
@@ -208,12 +244,18 @@ app.frame('/search', async (c) => {
           height="100%"
       >
           <VStack gap="4">
-              <Image
-                height="48"
-                objectFit="cover"
-                src="/airstack.png"
-              />
-              <Spacer size="12" />
+              <Box flexDirection="row">
+                <Image
+                    height="24"
+                    objectFit="cover"
+                    src="/airstack.png"
+                  />
+                <Spacer size="10" />
+                <Text color="red" decoration="underline" align="center" size="14">
+                  Airstack
+                </Text>
+              </Box>
+              <Spacer size="16" />
               <Heading color="red" weight="900" align="center" size="32">
                 🎖️ SCS Checker 🎖️
               </Heading>
@@ -286,6 +328,18 @@ app.frame('/result', async (c) => {
             height="100%"
         >
             <VStack gap="4">
+                <Box flexDirection="row">
+                  <Image
+                      height="24"
+                      objectFit="cover"
+                      src="/airstack.png"
+                    />
+                  <Spacer size="10" />
+                  <Text color="red" decoration="underline" align="center" size="14">
+                    Airstack
+                  </Text>
+                </Box>
+                <Spacer size="16" />
                 <Heading color="red" weight="900" align="center" size="32">
                   🎖️ Result 🎖️
                 </Heading>
@@ -327,6 +381,18 @@ app.frame('/result', async (c) => {
             height="100%"
         >
             <VStack gap="4">
+                <Box flexDirection="row">
+                  <Image
+                      height="24"
+                      objectFit="cover"
+                      src="/airstack.png"
+                    />
+                  <Spacer size="10" />
+                  <Text color="red" decoration="underline" align="center" size="14">
+                    Airstack
+                  </Text>
+                </Box>
+                <Spacer size="16" />
                 <Heading color="red" weight="900" align="center" size="32">
                   ⚠️ Error ⚠️
                 </Heading>
