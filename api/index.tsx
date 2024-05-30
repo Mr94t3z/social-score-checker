@@ -171,7 +171,7 @@ app.frame('/scs-frame/:castFid', async (c) => {
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="tosca" align="center" size="16">@{username} have score</Text>
                     <Spacer size="10" />
-                    <Text color="yellow" align="center" size="16"> {score} 🪪</Text>
+                    <Text color="yellow" align="center" size="16"> {score > 0.01 ? score.toFixed(2) : score.toFixed(4)} 🪪</Text>
                 </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
@@ -353,7 +353,7 @@ app.frame('/result', async (c) => {
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="tosca" align="center" size="16">@{username} have score</Text>
                     <Spacer size="10" />
-                    <Text color="yellow" align="center" size="16"> {score} 🪪</Text>
+                    <Text color="yellow" align="center" size="16"> {score > 0.01 ? score.toFixed(2) : score.toFixed(4)} 🪪</Text>
                 </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
