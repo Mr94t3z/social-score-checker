@@ -84,37 +84,25 @@ app.frame('/', (c) => {
 app.castAction(
   '/scs',
   (c) => {
-    // Stringify the entire castId object
-    const castId = JSON.stringify(c.actionData.castId);
+    const { actionData } = c
+    const {fid, url } = actionData
 
-    // Parse the message back to an object to extract fid
-    const parsedCastId = JSON.parse(castId);
-    const castFid = parsedCastId.fid;
-
-    return c.frame({ path: `/scs-frame/${castFid}`})
+    return c.frame({ path: `/scs-frame/${fid}/${url}`})
   }, 
   { name: "SCS Checker", icon: "id-badge", description: "A Farcaster Social Capital Scores (SCS) Checker built with Airstack."}
 )
 
 
-app.frame('/scs-frame/:castFid', async (c) => {
-  const { castFid } = c.req.param();
+app.frame('/scs-frame/:fid/:url', async (c) => {
+  const { fid, url } = c.req.param();
 
   try {
-    // Define Farcaster Social Capital GraphQL query by FID
+    // Define Farcaster Social Capital Rank/Score/Value GraphQL query by FID
     const query = 
     `
       query MyQuery {
         Socials(
-          input: {
-            filter: {
-              dappName: {
-                _eq: farcaster
-              },
-              identity: { _eq: "fc_fid:${castFid}" }
-            },
-            blockchain: ethereum
-          }
+          input: {filter: {dappName: {_eq: farcaster}, identity: {_eq: "fc_fid:${fid}"}}, blockchain: ethereum}
         ) {
           Social {
             socialCapital {
@@ -122,6 +110,15 @@ app.frame('/scs-frame/:castFid', async (c) => {
               socialCapitalRank
             }
             profileName
+          }
+        }
+        FarcasterCasts(
+          input: {filter: {url: {_eq: "${url}"}}, blockchain: ALL}
+        ) {
+          Cast {
+            socialCapitalValue {
+              formattedValue
+            }
           }
         }
       }
@@ -134,6 +131,7 @@ app.frame('/scs-frame/:castFid', async (c) => {
 
     const score = socialCapital.socialCapitalScore;
     const rank = socialCapital.socialCapitalRank;
+    const cast_value = data.FarcasterCasts.Cast[0].socialCapitalValue.formattedValue;
 
     return c.res({
       image: (
@@ -172,6 +170,11 @@ app.frame('/scs-frame/:castFid', async (c) => {
                     <Text color="tosca" align="center" size="16">@{username} have score</Text>
                     <Spacer size="10" />
                     <Text color="yellow" align="center" size="16"> {score > 0.01 ? score.toFixed(2) : score.toFixed(4)} 🪪</Text>
+                </Box>
+                <Box flexDirection="row" justifyContent="center">
+                    <Text color="tosca" align="center" size="16">Cast value</Text>
+                    <Spacer size="10" />
+                    <Text color="yellow" align="center" size="16"> {cast_value > 0.01 ? cast_value.toFixed(2) : cast_value.toFixed(4)} 🏅</Text>
                 </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
@@ -288,7 +291,7 @@ app.frame('/result', async (c) => {
   const username = inputText;
 
   try {
-    // Define Farcaster Social Capital GraphQL query by username
+    // Define Farcaster Social Capital Rank & Score GraphQL query by username
     const query = 
     `
     query MyQuery {
