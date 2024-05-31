@@ -174,7 +174,7 @@ app.frame('/scs-frame/:fid/:hash', async (c) => {
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="tosca" align="center" size="16">@{username} have score</Text>
                     <Spacer size="10" />
-                    <Text color="yellow" align="center" size="16"> {score > 0.01 ? score.toFixed(2) : score.toFixed(4)} 🪪</Text>
+                    <Text color="yellow" align="center" size="16"> {score < 0.0001 ? '0' : score.toFixed(4)} 🪪</Text>
                 </Box>
                 <Box flexDirection="row" justifyContent="center">
                     <Text color="tosca" align="center" size="16">Cast value</Text>
