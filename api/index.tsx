@@ -269,7 +269,7 @@ app.frame('/search', async (c) => {
               </Heading>
               <Spacer size="22" />
               <Text align="center" color="tosca" size="16">
-                Please input the username to check the Social Capital Rank & Score.
+                Please input the username to check the Social Capital Score & Rank.
               </Text>
               <Spacer size="22" />
               <Box flexDirection="row" justifyContent="center">
