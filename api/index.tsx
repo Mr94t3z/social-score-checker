@@ -402,7 +402,7 @@ app.frame('/result', async (c) => {
                 </Box>
                 <Spacer size="16" />
                 <Heading color="red" weight="900" align="center" size="32">
-                  ⚠️ Error ⚠️
+                  ⚠️ Failed ⚠️
                 </Heading>
                 <Spacer size="16" />
                 <Text align="center" color="tosca" size="16">
