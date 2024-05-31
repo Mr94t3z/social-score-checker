@@ -125,18 +125,39 @@ app.frame('/scs-frame/:fid/:hash', async (c) => {
             }
           }
         }
+        FarcasterReplies(
+          input: {filter: {hash: {_eq: "${hash}"}}, blockchain: ALL}
+        ) {
+          Reply {
+            socialCapitalValue {
+              formattedValue
+            }
+          }
+        }
       }
     `;
 
     const { data } = await fetchQuery(query);
 
     const socialCapital = data.Socials.Social[0].socialCapital;
-    const socialCapitalValue = data.FarcasterCasts.Cast[0].socialCapitalValue;
     const username = data.Socials.Social[0].profileName;
-    
+
     const rank = socialCapital.socialCapitalRank;
     const score = socialCapital.socialCapitalScore;
-    const cast_value = socialCapitalValue.formattedValue;
+
+    let cast_value;
+    let cast_label;
+
+    if (data.FarcasterCasts.Cast.length > 0) {
+        cast_value = data.FarcasterCasts.Cast[0].socialCapitalValue.formattedValue;
+        cast_label = "Cast value";
+    } else if (data.FarcasterReplies.Reply.length > 0) {
+        cast_value = data.FarcasterReplies.Reply[0].socialCapitalValue.formattedValue;
+        cast_label = "Reply Cast value";
+    } else {
+        cast_value = null;
+        cast_label = "No Cast value available";
+    }
 
     return c.res({
       image: (
@@ -177,9 +198,9 @@ app.frame('/scs-frame/:fid/:hash', async (c) => {
                     <Text color="yellow" align="center" size="16"> {score < 0.0001 ? '0' : score >= 10 ? score.toFixed(2) : score.toFixed(4)} 🪪</Text>
                 </Box>
                 <Box flexDirection="row" justifyContent="center">
-                    <Text color="tosca" align="center" size="16">Cast value</Text>
+                    <Text color="tosca" align="center" size="16">{cast_label}</Text>
                     <Spacer size="10" />
-                    <Text color="yellow" align="center" size="16"> {cast_value > 0.01 ? cast_value.toFixed(2) : cast_value.toFixed(4)} 🏅</Text>
+                    <Text color="yellow" align="center" size="16"> {cast_value ? (cast_value > 0.01 ? cast_value.toFixed(2) : cast_value.toFixed(4)) : "N/A"} 🏅</Text>
                 </Box>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
