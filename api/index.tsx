@@ -224,7 +224,7 @@ app.frame('/scs-frame/:fid/:hash', async (c) => {
                 </Heading>
                 <Spacer size="16" />
                 <Text align="center" color="tosca" size="16">
-                  Uh oh, something went wrong!
+                  Uh oh, the value of the replied cast cannot be checked!
                 </Text>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
