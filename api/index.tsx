@@ -193,7 +193,7 @@ app.frame('/scs-frame/:fid/:hash', async (c) => {
                 </Box>
                 <Spacer size="10" />
                 <Box flexDirection="row" justifyContent="center">
-                    <Text color="tosca" align="center" size="16">@{username} have score</Text>
+                    <Text color="tosca" align="center" size="16">@{username} - Social Score</Text>
                     <Spacer size="10" />
                     <Text color="yellow" align="center" size="16"> {score < 0.0001 ? '0' : score >= 10 ? score.toFixed(2) : score.toFixed(4)} 🪪</Text>
                 </Box>
@@ -380,7 +380,7 @@ app.frame('/result', async (c) => {
                 </Box>
                 <Spacer size="10" />
                 <Box flexDirection="row" justifyContent="center">
-                    <Text color="tosca" align="center" size="16">@{username} have score</Text>
+                    <Text color="tosca" align="center" size="16">@{username} - Social Score</Text>
                     <Spacer size="10" />
                     <Text color="yellow" align="center" size="16"> {score < 0.0001 ? '0' : score >= 10 ? score.toFixed(2) : score.toFixed(4)} 🪪</Text>
                 </Box>
