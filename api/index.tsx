@@ -267,7 +267,7 @@ app.frame('/search', async (c) => {
               <Heading color="red" weight="900" align="center" size="32">
                 🎖️ SCS Checker 🎖️
               </Heading>
-              <Spacer size="16" />
+              <Spacer size="22" />
               <Text align="center" color="tosca" size="16">
                 Please input the username to check the Social Capital Rank & Score.
               </Text>
