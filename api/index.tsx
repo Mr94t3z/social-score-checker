@@ -85,16 +85,16 @@ app.castAction(
   '/scs',
   (c) => {
     const { actionData } = c
-    const {fid, url } = actionData
+    const {fid, messageHash } = actionData
 
-    return c.frame({ path: `/scs-frame/${fid}/${url}`})
+    return c.frame({ path: `/scs-frame/${fid}/${messageHash}`})
   }, 
   { name: "SCS Checker", icon: "id-badge", description: "A Farcaster Social Capital Scores (SCS) Checker built with Airstack."}
 )
 
 
-app.frame('/scs-frame/:fid/:url', async (c) => {
-  const { fid, url } = c.req.param();
+app.frame('/scs-frame/:fid/:messageHash', async (c) => {
+  const { fid, messageHash } = c.req.param();
 
   try {
     // Define Farcaster Social Capital Rank/Score/Value GraphQL query by FID
@@ -113,7 +113,7 @@ app.frame('/scs-frame/:fid/:url', async (c) => {
           }
         }
         FarcasterCasts(
-          input: {filter: {url: {_eq: "${url}"}}, blockchain: ALL}
+          input: {filter: {hash: {_eq: "${messageHash}"}}, blockchain: ALL}
         ) {
           Cast {
             socialCapitalValue {
