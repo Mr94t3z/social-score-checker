@@ -245,7 +245,7 @@ app.frame('/scs-frame/:fid/:hash', async (c) => {
                 </Heading>
                 <Spacer size="16" />
                 <Text align="center" color="tosca" size="16">
-                  Uh oh, you can only check the main cast, not the replied cast!
+                  Uh oh, something went wrong!
                 </Text>
                 <Spacer size="22" />
                 <Box flexDirection="row" justifyContent="center">
