@@ -127,11 +127,12 @@ app.frame('/scs-frame/:fid/:messageHash', async (c) => {
     const { data } = await fetchQuery(query);
 
     const socialCapital = data.Socials.Social[0].socialCapital;
+    const socialCapitalValue = data.FarcasterCasts.Cast[0].socialCapitalValue;
     const username = data.Socials.Social[0].profileName;
 
     const score = socialCapital.socialCapitalScore;
     const rank = socialCapital.socialCapitalRank;
-    const cast_value = data.FarcasterCasts.Cast[0].socialCapitalValue.formattedValue;
+    const cast_value = socialCapitalValue.formattedValue;
 
     return c.res({
       image: (
