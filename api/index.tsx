@@ -150,10 +150,10 @@ app.frame('/scs-frame/:fid/:hash', async (c) => {
 
     if (data.FarcasterCasts.Cast.length > 0) {
         cast_value = data.FarcasterCasts.Cast[0].socialCapitalValue.formattedValue;
-        cast_label = "Cast value";
+        cast_label = "The Cast value is";
     } else if (data.FarcasterReplies.Reply.length > 0) {
         cast_value = data.FarcasterReplies.Reply[0].socialCapitalValue.formattedValue;
-        cast_label = "Reply Cast value";
+        cast_label = "The Reply Cast value is";
     } else {
         cast_value = null;
         cast_label = "No Cast value available";
